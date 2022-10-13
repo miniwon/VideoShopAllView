@@ -95,7 +95,16 @@ public class CustomerView extends JPanel
 			model.insertCustomer(vo);
 			JOptionPane.showMessageDialog(null, "회원 가입이 완료되었습니다");
 		} catch ( Exception e ) {
-			System.out.println("입력 실패: " + e.getMessage());
+			if (e.getMessage().contains("unique constraint (PROJECT5.PK_CUSTOMER_TEL) violated")) {
+				JOptionPane.showMessageDialog(null, "이미 존재하는 전화번호입니다");
+			} else if
+				(e.getMessage().contains("ORA-01400: cannot insert NULL into")) {
+					JOptionPane.showMessageDialog(null, "전화번호를 입력해 주세요");
+				
+			}
+			else {
+				System.out.println("입력 실패: " + e.getMessage());
+		}
 		}
 		
 		// 4. 화면 초기화
